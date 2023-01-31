@@ -70,7 +70,7 @@ public class Cliente {
 
         System.out.println("Introduzca la ruta del fichero:");
         ruta = sc.next();
-        // sc.close();
+        sc.close();
 
         return ruta;
     }

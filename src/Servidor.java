@@ -67,12 +67,16 @@ public class Servidor {
     public static String leeRuta(String ruta) throws FileNotFoundException {
 
         File file = new File(ruta);
-        String contenido = "Hello World";
+        StringBuilder contenido = new StringBuilder();
         Scanner sc = new Scanner(file);
         if (file.exists()) {
-            contenido = sc.nextLine();
+            while (sc.hasNext()){
+                contenido.append(sc.nextLine()).append(" ");
+            }
+        }else {
+            contenido = new StringBuilder(" Hello world");
         }
 
-        return contenido;
+        return contenido.toString();
     }
 }
