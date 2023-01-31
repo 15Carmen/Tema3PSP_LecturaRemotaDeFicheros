@@ -58,23 +58,31 @@ public class Servidor {
 //			socketCliente.close();
 //			socketServidor.close();
 
-        } catch (IOException e) {
+        } catch (FileNotFoundException fnfe){
+            System.out.println("ERROR: Fichero no encontrado");
+            fnfe.printStackTrace();
+        }catch (IOException e) {
             System.err.println("ERROR: Error al crear el socket en el puerto 50000");
             e.printStackTrace();
         }
     }
 
-    public static String leeRuta(String ruta) throws FileNotFoundException {
-
-        File file = new File(ruta);
+    public static String leeRuta(String ruta){
         StringBuilder contenido = new StringBuilder();
-        Scanner sc = new Scanner(file);
-        if (file.exists()) {
-            while (sc.hasNext()){
-                contenido.append(sc.nextLine()).append(" ");
+
+        try {
+            File file = new File(ruta);
+
+            Scanner sc = new Scanner(file);
+            if (file.exists()) {
+                while (sc.hasNext()){
+                    contenido.append(sc.nextLine()).append(" ");
+                }
+            }else {
+                contenido = new StringBuilder(" Hello world");
             }
-        }else {
-            contenido = new StringBuilder(" Hello world");
+        }catch (FileNotFoundException fnfe){
+            contenido.append("ERROR: Fichero no encontrado");
         }
 
         return contenido.toString();
